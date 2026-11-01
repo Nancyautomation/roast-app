@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Roasted</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050505;--fg:#f4f4f4;--dim:#9a9a9a;--pink:#d9709a;--line:#2a2a2a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:'Space Grotesk',system-ui,sans-serif;min-height:100vh}
+button{font:inherit;cursor:pointer;color:inherit}
+nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 5vw;font-size:11px}
+nav b{font-size:15px;letter-spacing:.02em}
+nav div{display:flex;gap:22px;overflow-x:auto}
+nav a{color:var(--fg);text-decoration:none;white-space:nowrap}
+nav a.new{position:relative}
+nav a.new::before{content:"NEW";position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--pink);color:#000;font-size:6px;padding:1px 4px;border-radius:2px}
+main{max-width:1100px;margin:0 auto;padding:24px 5vw 64px}
+.stage{border:1px solid var(--line);border-radius:22px;padding:5vw;min-height:60vh}
+.poster{background:var(--pink);color:#fff;position:relative;overflow:hidden;aspect-ratio:3/4;padding:7% 8%;display:flex;flex-direction:column}
+.poster small{font-family:Anton;font-size:clamp(20px,4vw,30px);letter-spacing:.02em}
+.poster h2{font-family:Anton;font-weight:400;font-size:clamp(40px,9.5vw,86px);line-height:.95;margin:0;text-transform:uppercase;position:relative;z-index:2}
+.poster h3{font-family:Anton;font-weight:400;font-size:clamp(20px,4vw,30px);margin:6px 0 0;position:relative;z-index:2}
+.poster hr{width:70px;border:0;border-top:2px solid #fff;margin:14px 0}
+.poster svg{position:absolute;right:-4%;bottom:-2%;width:82%}
+.poster .cap{position:absolute;left:8%;bottom:5%;font-size:12px;font-weight:700;z-index:2;max-width:55%;line-height:1.2}
+.res{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:4vw;align-items:start}
+.traits{display:grid;grid-template-columns:auto 1fr;gap:0 20px}
+.row{display:contents}
+.pair{display:flex;align-items:flex-end;gap:10px;border-top:1px solid var(--line);padding:12px 0}
+.pair .l{font-family:Anton;font-size:52px;line-height:.9;color:var(--pink)}
+.pair .r{font-family:Anton;font-size:28px;line-height:1;color:#555}
+.pair .t{font-size:10px;color:var(--dim);line-height:1.5}
+.pair .t b{display:block;color:var(--fg);font-size:15px}
+.say{border-top:1px solid var(--line);padding:12px 0;font-size:13px;line-height:1.35;color:var(--pink);display:flex;align-items:center}
+.circ{display:flex;gap:18px;margin-top:22px}
+.circ button{width:92px;height:92px;border-radius:50%;border:0;background:var(--pink);color:#000;font-size:11px;font-weight:700;display:grid;place-items:center;text-align:center;line-height:1.1}
+.circ button.o{background:transparent;color:var(--fg);border:1px solid var(--fg)}
+.circ svg{width:26px;height:26px;display:block;margin:0 auto 3px}
+.receipts{margin-top:28px;border-top:1px solid var(--line)}
+.receipts p{margin:0;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--dim);line-height:1.4}
+.receipts p b{color:var(--fg);font-weight:500}
+.hero{max-width:640px}
+.hero h1{font-family:'Space Grotesk';font-weight:500;font-size:clamp(40px,9vw,88px);line-height:1;letter-spacing:-.035em;margin:0 0 18px}
+.hero h1 em{font-style:normal;color:var(--pink)}
+.hero p{color:var(--dim);font-size:16px;margin:0 0 28px;max-width:44ch}
+.btn{background:var(--pink);color:#000;border:0;border-radius:99px;padding:15px 30px;font-weight:700;font-size:15px}
+.btn:focus-visible,.opt:focus-visible,.circ button:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.prog{height:3px;background:var(--line);margin-bottom:28px}
+.prog i{display:block;height:100%;background:var(--pink);transition:width .25s}
+.cat{font-size:12px;color:var(--pink);margin-bottom:10px}
+.q{font-family:'Space Grotesk';font-weight:500;font-size:clamp(30px,6vw,52px);line-height:1.05;letter-spacing:-.03em;margin:0 0 28px;max-width:18ch}
+.opts{display:grid;gap:10px;max-width:520px}
+.opt{text-align:left;background:transparent;border:1px solid #444;border-radius:12px;padding:16px 18px;font-size:16px}
+.opt:hover{background:var(--pink);color:#000;border-color:var(--pink)}
+.ai{margin-top:28px;padding:20px;border:1px solid var(--pink);border-radius:14px;color:var(--pink);font-size:16px;line-height:1.5}input{width:100%;background:transparent;border:1px solid #444;border-radius:12px;padding:16px 18px;color:#fff;font:inherit;font-size:16px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}.cc{border:1px solid var(--line);border-radius:16px;padding:20px}.cc.me{border-color:var(--pink)}.cc b{font-size:19px}.cc small{display:block;color:var(--pink);margin:4px 0 8px}.cc p,.rm li{color:var(--dim);font-size:14px;line-height:1.5;margin:0}.rm{max-width:520px;padding-left:18px}.rm li{margin-bottom:8px}.mini{background:var(--pink);border-radius:14px;aspect-ratio:3/4;padding:16px;position:relative;overflow:hidden;color:#fff;font-family:Anton}.mini h4{font-weight:400;font-size:30px;line-height:1;margin:6px 0;text-transform:uppercase}.mini svg{position:absolute;right:-8%;bottom:-4%;width:75%}.seg{display:flex;gap:8px;margin-bottom:12px}.seg button{flex:1;border:1px solid #444;background:transparent;border-radius:99px;padding:10px}.seg button.on{background:var(--pink);color:#000;border-color:var(--pink)}.prem{margin-top:28px;border:1px solid #fff;border-radius:14px;padding:22px}.prem h3{margin:0 0 6px;font-size:20px}.prem span,nav a.on{color:var(--pink)}.prem p{color:var(--dim);margin:0 0 10px}.prem a.btn{display:inline-block;text-decoration:none;margin:6px 0}.prem input{margin:8px 0}.blur{filter:blur(5px);color:var(--dim);user-select:none;margin:10px 0}#do{white-space:pre-wrap;line-height:1.6;margin-top:14px}.hist{display:flex;align-items:center;gap:12px;border-top:1px solid var(--line);padding:12px 0;font-size:14px}.hist i{flex:1;height:8px;background:#222}.hist i b{display:block;height:100%;background:var(--pink)}.toast{font-size:12px;color:var(--dim);margin-top:10px;min-height:16px}
+@media (max-width:760px){.res{grid-template-columns:1fr}.poster{aspect-ratio:auto;min-height:440px}nav div{gap:14px}}
+</style>
+</head>
+<body>
+<nav><b>Roasted</b><div><a href="#" data-v="home">Home</a><a class="new" href="#" data-v="roadmap">Roadmap</a><a href="#" data-v="club">Club</a><a href="#" data-v="receipts">Receipts</a><a href="#" data-v="me">Me</a><a href="#" data-v="gallery">Gallery</a></div></nav>
+<main><div class="stage" id="app"></div></main>
+<script>
+// ---- EDIT HERE ----
+// dimension per category: [chaos letter, calm letter, chaos label, calm label, caption]
+var DIM={habits:["N","M","Night owl","Morning person","You and the sun are on bad terms"],spending:["I","T","Impulsive","Thrifty","Your wallet leaves quietly and without a note"],productivity:["D","E","Deadline","Early","You work best when it's already too late"],relationships:["G","R","Ghost","Replier","Your replies arrive like a postcard"],lifestyle:["S","B","Sofa","Busy","Your couch has your outline"]};
+var CATS={habits:"Habits",spending:"Spending",productivity:"Productivity",relationships:"Relationships",lifestyle:"Lifestyle"};
+// option: [label, score 0-3 (3 = most chaotic), roast line]
+var Q=[
+{c:"habits",q:"What time do you actually fall asleep?",o:[["Before midnight",0,"Asleep before midnight. Suspicious. Who hurt you into being healthy?"],["Around 1 am",2,"Bedtime is a suggestion you make every night and break every night."],["When the sun comes up",3,"You and the sun are on a first-name basis, and not in a good way."]]},
+{c:"habits",q:"Your phone screen time is...",o:[["Under 3 hours",0,"Under 3 hours. You have either a life or a very good lie."],["4 to 6 hours",2,"Six hours a day is a part-time job with no pay and worse management."],["I'm afraid to look",3,"You turned off the weekly report. That's the report."]]},
+{c:"spending",q:"Last impulse purchase?",o:[["Haven't made one",0,"No impulse buys. Your wallet files a thank-you card every month."],["Something under $20",1,"Small stuff, but 'small stuff' is how most budgets die."],["Something I regret already",3,"It's still in the box, and so is your self-respect."]]},
+{c:"spending",q:"Subscriptions you forgot you pay for?",o:[["None",0,"Zero forgotten subscriptions. Nobody believes you, including us."],["One or two",2,"You fund two apps you opened once. Philanthropy, really."],["Probably five or more",3,"A small company somewhere is paying rent with your forgetfulness."]]},
+{c:"productivity",q:"Your to-do list is...",o:[["Done by Friday",0,"Done by Friday. Please share your secret, or at least your calendar."],["A list I rewrite often",2,"Rewriting the list counts as work only in your head."],["It's all in my head",3,"Your head is a browser with 47 tabs and no sound source."]]},
+{c:"productivity",q:"A deadline is next week. You...",o:[["Start today",0,"You start early. Everyone around you quietly resents it."],["Start two days before",2,"Pressure is your only coworker, and you let it do all the work."],["Start the night before",3,"The night before is your whole process. Panic with a plan B."]]},
+{c:"relationships",q:"How fast do you reply to messages?",o:[["Within minutes",0,"Instant replies. Your friends feel loved, and a little watched."],["Within a day",1,"A day later, with 'sorry, just saw this.' You saw it."],["I read it and forget",3,"You've left people on read so long they've started a support group."]]},
+{c:"relationships",q:"When plans get made, you...",o:[["Organize them",1,"You're the planner. Also the group's unpaid event staff."],["Say 'sounds good!'",1,"You say 'sounds good' to everything and show up to half."],["Cancel last minute",3,"Your cancellation texts are better written than your actual plans."]]},
+{c:"lifestyle",q:"Your weekend looks like...",o:[["Out and busy",1,"Packed weekends. Rest is a Monday problem."],["Home with a plan",0,"A planned home weekend. Annoyingly well adjusted."],["Couch, snacks, one 'quick' show",3,"One quick episode became a season. The couch has your outline."]]},
+{c:"lifestyle",q:"Your kitchen right now has...",o:[["Actual meals ready",0,"Meal prep person. We will not be taking questions."],["Snacks and hope",2,"Snacks and hope. Mostly snacks."],["A delivery app on speed dial",3,"Your driver knows your gate, your dog and your secrets."]]}
+];
+// archetype by your worst category: [poster title, club line, verdict]
+var ARCH={habits:["The Midnight Philosopher","IN BED AT DAWN","Sleep and screens are running your life, and they're bad managers."],spending:["The Cart Abandoner","IN CHECKOUT","Your money leaves without a note. Cancel one subscription this week and call it growth."],productivity:["The Deadline Gambler","IN PANIC","You do your best work in a panic. Start one thing tomorrow: ten minutes, no excuses."],relationships:["The Seen And Unsent","ON READ","People like you and hear from you rarely. Reply to one old message today."],lifestyle:["The Couch Strategist","IN SWEATPANTS","You've optimized comfort into a lifestyle. Take one walk this weekend and tell no one."]};
+// ---- end edit zone ----
+var app=document.getElementById("app"),i=0,ans=[];
+function start(){i=0;ans=[];app.innerHTML='<div class="hero"><h1>Get <em>roasted</em> by your own habits</h1><p>Ten honest questions about your habits, spending, productivity, relationships and lifestyle. You get a humorous but insightful report. Nothing leaves your device.</p><button class="btn" id="go">Start the roast</button></div>';document.getElementById("go").onclick=ask}
+function ask(){var q=Q[i];
+app.innerHTML='<div class="prog"><i style="width:'+(i/Q.length*100)+'%"></i></div><div class="cat">'+CATS[q.c]+' &middot; '+(i+1)+' of '+Q.length+'</div><h2 class="q">'+q.q+'</h2><div class="opts">'+q.o.map(function(x,n){return '<button class="opt" data-n="'+n+'">'+x[0]+'</button>'}).join("")+'</div>';
+app.querySelectorAll(".opt").forEach(function(b){b.onclick=function(){var o=q.o[+b.dataset.n];ans.push({c:q.c,s:o[1],r:o[2],q:q.q,a:o[0]});i++;i<Q.length?ask():note()}})}
+var UP='<svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M7 9l5-5 5 5M5 20h14"/></svg>';
+var HEAD='<svg viewBox="0 0 300 300"><defs><linearGradient id="b" x1="0" x2="1"><stop offset="0" stop-color="#7ff3ff" stop-opacity=".9"/><stop offset="1" stop-color="#7ff3ff" stop-opacity="0"/></linearGradient></defs><polygon points="30,170 150,120 150,220" fill="url(#b)"/><path d="M180 40c40-10 90 20 85 70-3 30 10 40 25 60-20 10-35 5-45 20-5 30-5 60-5 110H170c5-40-20-50-30-80-20-5-25-20-20-40-15-30 5-60 25-70 0-40 5-60 35-70z" fill="#0a0a0a"/><circle cx="62" cy="250" r="26" fill="#0a0a0a"/><circle cx="62" cy="250" r="6" fill="#d9709a"/><circle cx="130" cy="285" r="20" fill="#0a0a0a"/><circle cx="240" cy="270" r="22" fill="#0a0a0a"/></svg>';
+function note(){app.innerHTML='<div class="cat">Last one</div><h2 class="q">What do you keep promising yourself?</h2><div class="opts"><div class="seg" id="tn"><button>Gentle</button><button class="on">Medium</button><button>Brutal</button></div><input id="pr" maxlength="150" placeholder="e.g. start going to the gym" autocomplete="off"><p class="toast" style="text-align:left">Optional. Your answers and this line are sent to an AI service (Google Gemini) to write your roast. Please avoid names or private details.</p><button class="btn" id="nx">Roast me</button><button class="opt" id="sk">Skip</button></div>';document.getElementById("nx").onclick=function(){result(document.getElementById("pr").value)};document.querySelectorAll("#tn button").forEach(function(b){b.onclick=function(){TONE=b.textContent.toLowerCase();document.querySelectorAll("#tn button").forEach(function(x){x.classList.toggle("on",x===b)})}});document.getElementById("sk").onclick=function(){result("")}}
+function result(promise){
+var tot={},max={},sum=0,mx=0;
+ans.forEach(function(a){tot[a.c]=(tot[a.c]||0)+a.s;max[a.c]=(max[a.c]||0)+3;sum+=a.s;mx+=3});
+var keys=Object.keys(tot),pct=Math.round(sum/mx*100);
+var worst=keys.slice().sort(function(a,b){return tot[b]/max[b]-tot[a]/max[a]})[0],ar=ARCH[worst];
+var code="";
+var rows=keys.map(function(c){var d=DIM[c],p=Math.round(8+tot[c]/max[c]*84),chaos=p>=50,big=chaos?p:100-p;code+=chaos?d[0]:d[1];
+return '<div class="pair"><span class="l">'+(chaos?d[0]:d[1])+'</span><span class="r">'+(chaos?d[1]:d[0])+'</span><span class="t"><b>'+big+'%</b>'+(chaos?d[2]:d[3])+'</span></div><div class="say">'+d[4]+'</div>'}).join("");
+var rc=ans.slice().sort(function(a,b){return b.s-a.s}).slice(0,5).map(function(a){return '<p><b>'+CATS[a.c]+'.</b> '+a.r+'</p>'}).join("");
+app.innerHTML='<div class="res"><div class="poster"><small>I\'m</small><h2>'+ar[0]+'</h2><hr><h3>'+ar[1]+'</h3>'+HEAD+'<div class="cap">'+pct+'% damage &middot; '+code+'</div></div><div><div class="traits" style="display:block">'+rows.replace(/<div class="pair">/g,'<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px"><div class="pair">').replace(/<div class="say">(.*?)<\/div>/g,'<div class="say">$1</div></div>')+'</div><div class="circ"><button id="sh">'+UP+'SHARE</button><button class="o" id="again">ROAST<br>AGAIN</button><button class="o" id="img">SAVE<br>IMAGE</button></div><div class="toast" id="t"></div></div></div><div class="ai" id="ai">Writing your personal roast...</div><div id="vs"></div><div class="prem" id="pm"></div><div class="receipts">'+rc+'</div>';
+document.getElementById("again").onclick=start;
+RES={k:worst,pct:pct,code:code,ar:ar,promise:promise||""};save();extras();var ai=document.getElementById("ai");
+fetch("/api/roast",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({answers:ans.map(function(a){return{q:a.q,a:a.a}}),promise:promise||"",archetype:ar[0],tone:TONE})}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){ai.textContent=d.roast}).catch(function(){ai.style.display="none"});
+document.getElementById("img").onclick=function(){saveImg(ar[0],ar[1],pct,code)};
+document.getElementById("sh").onclick=function(){var link=location.origin+location.pathname+"#vs="+worst+"."+pct+"."+code,txt="I'm "+ar[0]+" ("+code+"), "+pct+"% damage. Can you beat it?",t=document.getElementById("t");
+if(navigator.share){navigator.share({text:txt,url:link}).catch(function(){})}else{try{navigator.clipboard.writeText(txt+' '+link).then(function(){t.textContent="Copied to clipboard"},function(){t.textContent=txt})}catch(e){t.textContent=txt}}}}
+function saveImg(title,club,pct,code){
+document.fonts.load("100px Anton").then(function(){
+var c=document.createElement("canvas");c.width=1080;c.height=1920;var x=c.getContext("2d");
+x.fillStyle="#d9709a";x.fillRect(0,0,1080,1920);x.fillStyle="#fff";x.font="64px Anton";x.fillText("I'm",90,200);
+x.font="170px Anton";var w=title.toUpperCase().split(" "),y=380,l="";
+w.forEach(function(t){var n=l?l+" "+t:t;if(x.measureText(n).width>900&&l){x.fillText(l,90,y);y+=170;l=t}else l=n});x.fillText(l,90,y);
+x.fillRect(90,y+40,140,6);x.font="72px Anton";x.fillText(club,90,y+140);
+x.fillStyle="#0a0a0a";x.beginPath();x.arc(700,1350,380,0,7);x.fill();
+x.fillStyle="#fff";x.font="56px Anton";x.fillText(pct+"% DAMAGE  |  "+code,90,1800);
+c.toBlob(function(b){var f=new File([b],"my-roast.png",{type:"image/png"});
+if(navigator.canShare&&navigator.canShare({files:[f]}))navigator.share({files:[f]}).catch(function(){});
+else{var a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="my-roast.png";a.click()}})})}
+var TONE="medium",RES=null,FR=null,BUY="https://YOUR-STORE-LINK-HERE";
+var m=location.hash.match(/vs=(\w+)\.(\d+)\.(\w+)/);if(m&&ARCH[m[1]])FR={k:m[1],p:+m[2],c:m[3]};
+function H(){try{return JSON.parse(localStorage.getItem("rh")||"[]")}catch(e){return[]}}
+function save(){try{var h=H();h.push({d:Date.now(),p:RES.pct,c:RES.code,k:RES.k});localStorage.setItem("rh",JSON.stringify(h.slice(-30)))}catch(e){}}
+function K(){try{return localStorage.getItem("rk")||""}catch(e){return""}}
+function extras(){var v=document.getElementById("vs");
+if(FR){var w=RES.pct>FR.p?"You're the bigger disaster.":RES.pct<FR.p?"Your friend is the bigger disaster.":"Equally doomed.";v.innerHTML='<div class="ai" style="color:#fff"><b>You '+RES.pct+'%</b> ('+RES.code+') vs <b>friend '+FR.p+'%</b> ('+FR.c+', '+ARCH[FR.k][0]+')<br>'+w+'</div>'}
+var p=document.getElementById("pm");
+p.innerHTML='<h3>Deep Roast + 7-day fix plan <span>$1.99</span></h3><p>A full teardown of all five areas, plus a day-by-day plan for your worst one.</p><div class="blur">Habits: you say you will sleep earlier while... Spending: your cart knows what you did... Day 1: ...</div>'+(K()?'<button class="btn" id="dp">Generate my deep roast</button>':'<a class="btn" href="'+BUY+'" target="_blank" rel="noopener">Unlock for $1.99</a><input id="lk" placeholder="Already paid? Paste your license key"><button class="opt" id="ul">Unlock</button>')+'<div id="do"></div>';
+var go=function(k){var o=document.getElementById("do");o.textContent="Writing...";fetch("/api/deep",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({key:k,answers:ans.map(function(a){return{q:a.q,a:a.a}}),promise:RES.promise,archetype:RES.ar[0],tone:TONE})}).then(function(r){if(r.status==402){try{localStorage.removeItem("rk")}catch(e){}throw"That key isn't valid."}if(r.status==429)throw"Daily limit reached, try tomorrow.";if(!r.ok)throw"Something went wrong, try again.";return r.json()}).then(function(d){try{localStorage.setItem("rk",k)}catch(e){}o.textContent=d.text}).catch(function(e){o.textContent=typeof e=="string"?e:"Something went wrong."})};
+var dp=document.getElementById("dp"),ul=document.getElementById("ul");
+if(dp)dp.onclick=function(){go(K())};if(ul)ul.onclick=function(){go(document.getElementById("lk").value.trim())}}
+function roadmap(){app.innerHTML='<h2 class="q">Roadmap</h2><ul class="rm"><li>Live: 10-question roast, AI roast, share image, friend compare, Receipts history, Deep Roast.</li><li>Next: roast packs (money, work, dating).</li><li>Next: monthly retake with score trend.</li><li>Next: friend leaderboard.</li></ul>'}
+function club(){var l=H().slice(-1)[0];app.innerHTML='<h2 class="q">The clubs</h2><div class="grid">'+Object.keys(ARCH).map(function(k){var a=ARCH[k],me=l&&l.k==k;return'<div class="cc'+(me?' me':'')+'"><b>'+a[0]+'</b><small>'+a[1]+'</small><p>'+a[2]+'</p>'+(me?'<small>Your club</small>':'')+'</div>'}).join("")+'</div>'}
+function receipts(){var h=H().slice().reverse();app.innerHTML='<h2 class="q">Receipts</h2>'+(h.length?h.map(function(x){return'<div class="hist"><span>'+new Date(x.d).toLocaleDateString()+'</span><i><b style="width:'+x.p+'%"></b></i><span>'+x.p+'% '+x.c+'</span></div>'}).join("")+(h.length>1?'<p class="toast">Change since last time: '+(h[0].p-h[1].p>0?'+':'')+(h[0].p-h[1].p)+' points</p>':''):'<p class="toast">No receipts yet. Take the quiz first.</p>')}
+function me(){var h=H(),n=h.length,avg=n?Math.round(h.reduce(function(a,x){return a+x.p},0)/n):0;app.innerHTML='<h2 class="q">Me</h2><p>Roasts taken: <b>'+n+'</b><br>Average damage: <b>'+avg+'%</b><br>Deep Roast: <b>'+(K()?'unlocked':'locked')+'</b></p><div class="opts"><button class="opt" id="cl">Clear my data</button></div>';document.getElementById("cl").onclick=function(){try{localStorage.removeItem("rh");localStorage.removeItem("rk")}catch(e){}me()}}
+function gallery(){app.innerHTML='<h2 class="q">Gallery</h2><div class="grid">'+Object.keys(ARCH).map(function(k){var a=ARCH[k];return'<div class="mini"><span>I\'m</span><h4>'+a[0]+'</h4><span>'+a[1]+'</span>'+HEAD+'</div>'}).join("")+'</div>'}
+var VIEWS={home:start,roadmap:roadmap,club:club,receipts:receipts,me:me,gallery:gallery};
+document.querySelectorAll("nav a").forEach(function(a){a.onclick=function(e){e.preventDefault();document.querySelectorAll("nav a").forEach(function(x){x.classList.toggle("on",x===a)});VIEWS[a.dataset.v]()}});
+start();
+</script>
+</body>
+</html>
