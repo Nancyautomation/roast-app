@@ -119,7 +119,7 @@ x.fillStyle="#fff";x.font="56px Anton";x.fillText(pct+"% DAMAGE  |  "+code,90,18
 c.toBlob(function(b){var f=new File([b],"my-roast.png",{type:"image/png"});
 if(navigator.canShare&&navigator.canShare({files:[f]}))navigator.share({files:[f]}).catch(function(){});
 else{var a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="my-roast.png";a.click()}})})}
-var TONE="medium",RES=null,FR=null,BUY="https://YOUR-STORE-LINK-HERE";
+var TONE="medium",RES=null,FR=null,BUY="https://whynotdot.gumroad.com/l/qfnngt";
 var m=location.hash.match(/vs=(\w+)\.(\d+)\.(\w+)/);if(m&&ARCH[m[1]])FR={k:m[1],p:+m[2],c:m[3]};
 function H(){try{return JSON.parse(localStorage.getItem("rh")||"[]")}catch(e){return[]}}
 function save(){try{var h=H();h.push({d:Date.now(),p:RES.pct,c:RES.code,k:RES.k});localStorage.setItem("rh",JSON.stringify(h.slice(-30)))}catch(e){}}
